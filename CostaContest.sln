@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostaContest", "CostaContest\CostaContest.csproj", "{13528BA4-4AB8-42AC-9FDF-66AE01CAD2E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{FAE27AA4-0FC8-4B43-A36B-6349D3E740E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{13528BA4-4AB8-42AC-9FDF-66AE01CAD2E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13528BA4-4AB8-42AC-9FDF-66AE01CAD2E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13528BA4-4AB8-42AC-9FDF-66AE01CAD2E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13528BA4-4AB8-42AC-9FDF-66AE01CAD2E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAE27AA4-0FC8-4B43-A36B-6349D3E740E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAE27AA4-0FC8-4B43-A36B-6349D3E740E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAE27AA4-0FC8-4B43-A36B-6349D3E740E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAE27AA4-0FC8-4B43-A36B-6349D3E740E6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5E98AB60-7193-4A48-8516-6002F02646BD}
+	EndGlobalSection
+EndGlobal
