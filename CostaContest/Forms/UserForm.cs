@@ -24,7 +24,7 @@ namespace CostaContest.Forms
             {
                 _needSave = false;
                 btnSave.Text = "Закрыть";
-                LockControls();
+                LockEditing();
             }
         }
 
@@ -58,15 +58,14 @@ namespace CostaContest.Forms
 
         #region Actions
         
-        private void LockControls()
+        private void LockEditing()
         {
-            tbxName.Enabled = false;
-            tbxSurname.Enabled = false;
-            tbxPatronymic.Enabled = false;
-            dtDateOfBirth.Enabled = false;
-            tbxPost.Enabled = false;
-            tbxDocSer.Enabled = false;
-            tbxDocNum.Enabled = false;
+            tbxName.ReadOnly = true;
+            tbxSurname.ReadOnly = true;
+            tbxPatronymic.ReadOnly = true;
+            tbxPost.ReadOnly = true;
+            tbxDocSer.ReadOnly = true;
+            tbxDocNum.ReadOnly = true;
         }
 
         private bool UpdateUserData()
@@ -97,7 +96,7 @@ namespace CostaContest.Forms
             dtDateOfBirth.Value = Employee.DateOfBirth;
             tbxDepart.Text = Employee.Department?.Name;
             tbxPost.Text = Employee.Position;
-            nudAge.Value = Employee.Age;
+            tbxAge.Text = Employee.Age.ToString();
             tbxDocSer.Text = Employee.DocSeries;
             tbxDocNum.Text = Employee.DocNumber;
         }
