@@ -40,18 +40,17 @@
             this.tbxPost = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.nudAge = new System.Windows.Forms.NumericUpDown();
-            this.tbxDepart = new System.Windows.Forms.TextBox();
-            this.tbxDocSer = new System.Windows.Forms.TextBox();
-            this.tbxDocNum = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.tbxDocNum = new System.Windows.Forms.TextBox();
+            this.tbxDocSer = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tbxDepart = new System.Windows.Forms.TextBox();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.tbxAge = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAge)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -150,8 +149,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.tbxAge);
             this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.nudAge);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.tbxDocNum);
@@ -171,6 +170,49 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Личные данные";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 191);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(65, 13);
+            this.label9.TabIndex = 18;
+            this.label9.Text = "Номер док.";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 165);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(62, 13);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "Серия док.";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 133);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(91, 13);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Полный возраст";
+            // 
+            // tbxDocNum
+            // 
+            this.tbxDocNum.Location = new System.Drawing.Point(113, 184);
+            this.tbxDocNum.MaxLength = 6;
+            this.tbxDocNum.Name = "tbxDocNum";
+            this.tbxDocNum.Size = new System.Drawing.Size(83, 20);
+            this.tbxDocNum.TabIndex = 16;
+            // 
+            // tbxDocSer
+            // 
+            this.tbxDocSer.Location = new System.Drawing.Point(113, 158);
+            this.tbxDocSer.MaxLength = 4;
+            this.tbxDocSer.Name = "tbxDocSer";
+            this.tbxDocSer.Size = new System.Drawing.Size(83, 20);
+            this.tbxDocSer.TabIndex = 15;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.tbxDepart);
@@ -184,6 +226,14 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Организация";
             // 
+            // tbxDepart
+            // 
+            this.tbxDepart.Location = new System.Drawing.Point(108, 20);
+            this.tbxDepart.Name = "tbxDepart";
+            this.tbxDepart.ReadOnly = true;
+            this.tbxDepart.Size = new System.Drawing.Size(220, 20);
+            this.tbxDepart.TabIndex = 12;
+            // 
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(281, 343);
@@ -194,64 +244,13 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
-            // label7
+            // tbxAge
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 133);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(91, 13);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Полный возраст";
-            // 
-            // nudAge
-            // 
-            this.nudAge.Enabled = false;
-            this.nudAge.Location = new System.Drawing.Point(113, 126);
-            this.nudAge.Name = "nudAge";
-            this.nudAge.Size = new System.Drawing.Size(179, 20);
-            this.nudAge.TabIndex = 11;
-            // 
-            // tbxDepart
-            // 
-            this.tbxDepart.Enabled = false;
-            this.tbxDepart.Location = new System.Drawing.Point(108, 20);
-            this.tbxDepart.Name = "tbxDepart";
-            this.tbxDepart.Size = new System.Drawing.Size(220, 20);
-            this.tbxDepart.TabIndex = 12;
-            // 
-            // tbxDocSer
-            // 
-            this.tbxDocSer.Location = new System.Drawing.Point(113, 158);
-            this.tbxDocSer.MaxLength = 4;
-            this.tbxDocSer.Name = "tbxDocSer";
-            this.tbxDocSer.Size = new System.Drawing.Size(83, 20);
-            this.tbxDocSer.TabIndex = 15;
-            // 
-            // tbxDocNum
-            // 
-            this.tbxDocNum.Location = new System.Drawing.Point(113, 184);
-            this.tbxDocNum.MaxLength = 6;
-            this.tbxDocNum.Name = "tbxDocNum";
-            this.tbxDocNum.Size = new System.Drawing.Size(83, 20);
-            this.tbxDocNum.TabIndex = 16;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 165);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(62, 13);
-            this.label8.TabIndex = 17;
-            this.label8.Text = "Серия док.";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 191);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(65, 13);
-            this.label9.TabIndex = 18;
-            this.label9.Text = "Номер док.";
+            this.tbxAge.Location = new System.Drawing.Point(113, 130);
+            this.tbxAge.Name = "tbxAge";
+            this.tbxAge.ReadOnly = true;
+            this.tbxAge.Size = new System.Drawing.Size(179, 20);
+            this.tbxAge.TabIndex = 19;
             // 
             // UserForm
             // 
@@ -269,7 +268,6 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAge)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -290,12 +288,12 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.NumericUpDown nudAge;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tbxDepart;
         private System.Windows.Forms.TextBox tbxDocSer;
         private System.Windows.Forms.TextBox tbxDocNum;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox tbxAge;
     }
 }
