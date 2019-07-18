@@ -47,7 +47,7 @@ namespace BL.Models
         /// Код отдела
         /// </summary>
         [StringLength(10)]
-        public string Code { get => code; set => code = value.GreaterOrThrow(50, "Код не должен превышать 10 символов"); }
+        public string Code { get => code; set => code = value?.GreaterOrThrow(50, "Код не должен превышать 10 символов"); }
 
         /// <summary>
         /// Название отдела

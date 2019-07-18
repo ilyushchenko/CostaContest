@@ -6,6 +6,11 @@ namespace BL.Extensions
     {
         internal static string LessOrThrow(this string text, int minLength, string error)
         {
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+
             var clearValue = text.Trim();
             if (clearValue.Length <= minLength)
             {
@@ -16,6 +21,11 @@ namespace BL.Extensions
 
         internal static string GreaterOrThrow(this string text, int maxLength, string error)
         {
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+
             var clearValue = text.Trim();
             if (clearValue.Length > maxLength)
             {

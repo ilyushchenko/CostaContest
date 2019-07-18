@@ -69,7 +69,7 @@ namespace BL.Models
         public string Patronymic
         {
             get => patronymic;
-            set => patronymic = value.GreaterOrThrow(50, "Отчество не должно превышать 50 симаолов");
+            set => patronymic = value?.GreaterOrThrow(50, "Отчество не должно превышать 50 симаолов");
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace BL.Models
         public string DocSeries
         {
             get => docSeries;
-            set => docSeries = value.GreaterOrThrow(4, "Серия не должна превышать 4 символа");
+            set => docSeries = value?.GreaterOrThrow(4, "Серия не должна превышать 4 символа");
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace BL.Models
         public string DocNumber
         {
             get => docNumber;
-            set => docNumber = value.GreaterOrThrow(6, "Номер не должен превышать 6 символов");
+            set => docNumber = value?.GreaterOrThrow(6, "Номер не должен превышать 6 символов");
         }
 
         /// <summary>
