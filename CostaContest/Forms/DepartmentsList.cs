@@ -29,53 +29,13 @@ namespace CostaContest.Forms
             if (e.Node.Tag is Department department)
             {
                 _currentDepartment = department;
-
-                foreach (var employee in department.Empoyees)
-                {
-                    employeesDataGridView.Rows.Add(new[] {
-                    employee.ID.ToString(),
-                    employee.FirstName,
-                    employee.SurName,
-                    employee.Patronymic,
-                    employee.Position
-                });
-                }
+                UpdateEmployees();
             }
         }
 
         private async void DepartmentsList_Load(object sender, EventArgs e)
         {
             await UpdateDataAsync();
-        }
-
-        public async Task UpdateDataAsync()
-        {
-            // Clear previous data
-            _currentDepartment = null;
-            _currentEmployee = null;
-            departmentsTreeView.Nodes.Clear();
-
-            // Full new data
-            var departments = await Task.Run( () => _departmentsManager.GetDepartments());
-            var rootDepertments = departments.Where(d => !d.ParentDepartmentId.HasValue).ToArray();
-
-            //TODO: Удалить дублирование
-            foreach (var department in rootDepertments)
-            {
-                var node = new TreeNode(department.Name) { Name = department.Id.ToString(), Tag = department };
-                departmentsTreeView.Nodes.Add(node);
-                FillNode(node, department);
-            }
-        }
-
-        private void FillNode(TreeNode node, Department department)
-        {
-            foreach (var subDepartment in department.SubDepartmenents)
-            {
-                var subNode = new TreeNode(subDepartment.Name) { Name = subDepartment.Id.ToString(), Tag = subDepartment };
-                node.Nodes.Add(subNode);
-                FillNode(subNode, subDepartment);
-            }
         }
 
         private void EmployeesDataGridView_SelectionChanged(object sender, EventArgs e)
@@ -93,24 +53,19 @@ namespace CostaContest.Forms
             _currentEmployee = _employeesManager.GetById(id);
         }
 
+        #region CRUD Employees
+
         private void ShowEmpBnt_Click(object sender, EventArgs e)
         {
-            if (_currentEmployee == null)
-            {
-                MessageBox.Show("Вы не выбрали сотрудника", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            if (!IsEmployeeSelected()) return;
+
             var userForm = new UserForm(_currentEmployee);
             userForm.ShowDialog();
         }
 
-        private async void BtnAddEmp_Click(object sender, EventArgs e)
+        private void BtnAddEmp_Click(object sender, EventArgs e)
         {
-            if (_currentDepartment == null)
-            {
-                MessageBox.Show("Вы не выбрали отдел", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            if (!IsDepartmentSelected()) return;
 
             var userForm = new UserForm(_currentDepartment);
             var result = userForm.ShowDialog();
@@ -123,16 +78,12 @@ namespace CostaContest.Forms
             {
                 MessageBox.Show("Произошла ошибка, при сохранении", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            await UpdateDataAsync();
+            UpdateEmployees();
         }
 
-        private async void EmpEditBtn_Click(object sender, EventArgs e)
+        private void EmpEditBtn_Click(object sender, EventArgs e)
         {
-            if (_currentEmployee == null)
-            {
-                MessageBox.Show("Вы не выбрали отдел", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            if (!IsEmployeeSelected()) return;
 
             var userForm = new UserForm(_currentEmployee, true);
             var result = userForm.ShowDialog();
@@ -145,7 +96,142 @@ namespace CostaContest.Forms
             {
                 MessageBox.Show("Произошла ошибка, при сохранении", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            UpdateEmployees();
+        }
+
+        #endregion
+
+        #region CRUD Departments
+
+        private async void BtnAddDep_Click(object sender, EventArgs e)
+        {
+            var departments = await _departmentsManager.GetDepartmentsAsync();
+            var departmentForm = new DepartmentForm(departments);
+            var result = departmentForm.ShowDialog();
+
+            if (result != DialogResult.OK)
+            {
+                return;
+            }
+
+            if (!_departmentsManager.Create(departmentForm.Department))
+            {
+                MessageBox.Show("Произошла ошибка, при сохранении", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             await UpdateDataAsync();
         }
+
+        private async void BtnEditDep_Click(object sender, EventArgs e)
+        {
+            if (!IsDepartmentSelected()) return;
+
+            var departments = await _departmentsManager.GetDepartmentsAsync();
+            var departmentForm = new DepartmentForm(_currentDepartment, departments);
+
+            var result = departmentForm.ShowDialog();
+
+            if (result != DialogResult.OK)
+            {
+                return;
+            }
+
+            if (!_departmentsManager.Update(departmentForm.Department))
+            {
+                MessageBox.Show("Произошла ошибка, при сохранении", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            await UpdateDataAsync();
+        }
+
+        private void BtnShowDep_Click(object sender, EventArgs e)
+        {
+            if (!IsDepartmentSelected()) return;
+
+            var departmentForm = new DepartmentForm(_currentDepartment);
+            departmentForm.ShowDialog();
+        }
+
+        #endregion
+
+        #region Helpers
+
+        private bool IsDepartmentSelected()
+        {
+            if (_currentDepartment == null)
+            {
+                MessageBox.Show("Вы не выбрали отдел", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
+        private bool IsEmployeeSelected()
+        {
+            if (_currentEmployee == null)
+            {
+                MessageBox.Show("Вы не выбрали сотрудника", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
+        #endregion
+
+        #region Updaters
+
+        public async Task UpdateDataAsync()
+        {
+            // Clear previous data
+            _currentDepartment = null;
+            _currentEmployee = null;
+            await UpdateDepartments();
+            UpdateEmployees();
+        }
+
+        private async Task UpdateDepartments()
+        {
+            departmentsTreeView.Nodes.Clear();
+
+            // Full new data
+            var departments = await Task.Run(() => _departmentsManager.GetDepartments());
+            var rootDepertments = departments.Where(d => !d.ParentDepartmentId.HasValue).ToArray();
+
+            //TODO: Удалить дублирование
+            foreach (var department in rootDepertments)
+            {
+                var node = new TreeNode(department.ToString()) { Name = department.Id.ToString(), Tag = department };
+                departmentsTreeView.Nodes.Add(node);
+                FillNode(node, department);
+            }
+        }
+        private void FillNode(TreeNode node, Department department)
+        {
+            foreach (var subDepartment in department.SubDepartmenents)
+            {
+                var subNode = new TreeNode(subDepartment.ToString()) { Name = subDepartment.Id.ToString(), Tag = subDepartment };
+                node.Nodes.Add(subNode);
+                FillNode(subNode, subDepartment);
+            }
+        }
+
+        private void UpdateEmployees()
+        {
+            employeesDataGridView.Rows.Clear();
+
+            if (_currentDepartment == null) return;
+
+            foreach (var employee in _currentDepartment.Empoyees)
+            {
+                employeesDataGridView.Rows.Add(new[] {
+                    employee.ID.ToString(),
+                    employee.FirstName,
+                    employee.SurName,
+                    employee.Patronymic,
+                    employee.Position
+                });
+            }
+        }
+
+        #endregion  
     }
 }
