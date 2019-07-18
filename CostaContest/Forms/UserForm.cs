@@ -1,46 +1,62 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using BL.Models;
 
 namespace CostaContest.Forms
 {
-    public partial class UserForm : Form
+    public partial class UserForm : EditorBase
     {
-        private bool _needSave;
+        private readonly IEnumerable<Department> _departments;
+
         public Employee Employee { get; private set; }
-        public UserForm(Department department) : this()
+
+        #region Constructors
+
+        /// <summary>
+        /// Конструктор создания сотрудника
+        /// </summary>
+        /// <param name="department">Отдел сотрудника</param>
+        public UserForm(Department department) : this(new Employee(department), new Department[] { department }, ShowingMode.Creating)
         {
-            Employee = new Employee()
-            {
-                Department = department,
-                DepartmentID = department.Id
-            };
         }
 
-        public UserForm(Employee employee, bool edit = false) : this()
+        /// <summary>
+        /// Конструктор просмотра
+        /// </summary>
+        /// <param name="employee">Сотрудник</param>
+        public UserForm(Employee employee) : this(employee, new Department[0], ShowingMode.Showing)
         {
-            Employee = employee;
-            if (!edit)
-            {
-                _needSave = false;
-                btnSave.Text = "Закрыть";
-                LockEditing();
-            }
+        }
+
+        /// <summary>
+        /// Конструктор редактирования
+        /// </summary>
+        /// <param name="employee">Сотрудник</param>
+        /// <param name="departments">Доступные отделы</param>
+        /// <param name="mode">Режим показа</param>
+        public UserForm(Employee employee, IEnumerable<Department> departments, ShowingMode mode = ShowingMode.Editing) : this()
+        {
+            Employee = employee ?? throw new ArgumentNullException(nameof(employee));
+            _departments = departments ?? throw new ArgumentNullException(nameof(departments));
+            SetMode(mode);
         }
 
         private UserForm()
         {
             InitializeComponent();
-            _needSave = true;
         }
+
+        #endregion
 
         #region Events
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            if (_needSave)
+            if (Mode != ShowingMode.Showing)
             {
-                if (!UpdateUserData())
+                if (!CheckModel())
                 {
                     return;
                 }
@@ -49,16 +65,11 @@ namespace CostaContest.Forms
             Close();
         }
 
-        private void UserForm_Load(object sender, EventArgs e)
-        {
-            SetUserData();
-        }
-
         #endregion
 
         #region Actions
         
-        private void LockEditing()
+        protected override void LockEditing()
         {
             tbxName.ReadOnly = true;
             tbxSurname.ReadOnly = true;
@@ -66,29 +77,26 @@ namespace CostaContest.Forms
             tbxPost.ReadOnly = true;
             tbxDocSer.ReadOnly = true;
             tbxDocNum.ReadOnly = true;
+            cbxDepart.Visible = false;
+            btnSave.Text = "Закрыть";
         }
 
-        private bool UpdateUserData()
+        protected override bool UpdateData()
         {
-            try
-            {
-                Employee.FirstName = tbxName.Text;
-                Employee.SurName = tbxSurname.Text;
-                Employee.Patronymic = tbxPatronymic.Text;
-                Employee.DateOfBirth = dtDateOfBirth.Value;
-                Employee.Position = tbxPost.Text;
-                Employee.DocSeries = tbxDocSer.Text;
-                Employee.DocNumber = tbxDocNum.Text;
-            }
-            catch (Exception e)
-            {
-                ShowError(e.Message);
-                return false;
-            }
+            Employee.FirstName = tbxName.Text;
+            Employee.SurName = tbxSurname.Text;
+            Employee.Patronymic = tbxPatronymic.Text;
+            Employee.DateOfBirth = dtDateOfBirth.Value;
+            Employee.Position = tbxPost.Text;
+            Employee.DocSeries = tbxDocSer.Text;
+            Employee.DocNumber = tbxDocNum.Text;
+
+            Employee.Department = (Department)cbxDepart.SelectedItem;
+
             return true;
         }
 
-        private void SetUserData()
+        protected override void SetData()
         {
             tbxName.Text = Employee.FirstName;
             tbxSurname.Text = Employee.SurName;
@@ -99,11 +107,9 @@ namespace CostaContest.Forms
             tbxAge.Text = Employee.Age.ToString();
             tbxDocSer.Text = Employee.DocSeries;
             tbxDocNum.Text = Employee.DocNumber;
-        }
 
-        private void ShowError(string text)
-        {
-            MessageBox.Show(text, "Ошибка вводы данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            cbxDepart.Items.AddRange(_departments.ToArray());
+            cbxDepart.SelectedItem = Employee.Department;
         }
 
         #endregion

@@ -30,16 +30,19 @@
         {
             this.departmentsTreeView = new System.Windows.Forms.TreeView();
             this.employeesDataGridView = new System.Windows.Forms.DataGridView();
-            this.empEditBtn = new System.Windows.Forms.Button();
-            this.btnAddEmp = new System.Windows.Forms.Button();
-            this.showEmpBnt = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SurName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Patronymic = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.empEditBtn = new System.Windows.Forms.Button();
+            this.btnAddEmp = new System.Windows.Forms.Button();
+            this.showEmpBnt = new System.Windows.Forms.Button();
             this.depGroupBox = new System.Windows.Forms.GroupBox();
             this.empGroupBox = new System.Windows.Forms.GroupBox();
+            this.btnAddDep = new System.Windows.Forms.Button();
+            this.btnEditDep = new System.Windows.Forms.Button();
+            this.btnShowDep = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.employeesDataGridView)).BeginInit();
             this.depGroupBox.SuspendLayout();
             this.empGroupBox.SuspendLayout();
@@ -49,7 +52,7 @@
             // 
             this.departmentsTreeView.Location = new System.Drawing.Point(6, 19);
             this.departmentsTreeView.Name = "departmentsTreeView";
-            this.departmentsTreeView.Size = new System.Drawing.Size(308, 442);
+            this.departmentsTreeView.Size = new System.Drawing.Size(315, 442);
             this.departmentsTreeView.TabIndex = 0;
             this.departmentsTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.DepartmentsTreeView_AfterSelect);
             // 
@@ -70,36 +73,6 @@
             this.employeesDataGridView.Size = new System.Drawing.Size(519, 442);
             this.employeesDataGridView.TabIndex = 1;
             this.employeesDataGridView.SelectionChanged += new System.EventHandler(this.EmployeesDataGridView_SelectionChanged);
-            // 
-            // empEditBtn
-            // 
-            this.empEditBtn.Location = new System.Drawing.Point(424, 471);
-            this.empEditBtn.Name = "empEditBtn";
-            this.empEditBtn.Size = new System.Drawing.Size(101, 35);
-            this.empEditBtn.TabIndex = 6;
-            this.empEditBtn.Text = "Редактирование сотрудника";
-            this.empEditBtn.UseVisualStyleBackColor = true;
-            this.empEditBtn.Click += new System.EventHandler(this.EmpEditBtn_Click);
-            // 
-            // btnAddEmp
-            // 
-            this.btnAddEmp.Location = new System.Drawing.Point(6, 467);
-            this.btnAddEmp.Name = "btnAddEmp";
-            this.btnAddEmp.Size = new System.Drawing.Size(101, 35);
-            this.btnAddEmp.TabIndex = 7;
-            this.btnAddEmp.Text = "Добавить сотруднка";
-            this.btnAddEmp.UseVisualStyleBackColor = true;
-            this.btnAddEmp.Click += new System.EventHandler(this.BtnAddEmp_Click);
-            // 
-            // showEmpBnt
-            // 
-            this.showEmpBnt.Location = new System.Drawing.Point(317, 471);
-            this.showEmpBnt.Name = "showEmpBnt";
-            this.showEmpBnt.Size = new System.Drawing.Size(101, 35);
-            this.showEmpBnt.TabIndex = 8;
-            this.showEmpBnt.Text = "Просмотр";
-            this.showEmpBnt.UseVisualStyleBackColor = true;
-            this.showEmpBnt.Click += new System.EventHandler(this.ShowEmpBnt_Click);
             // 
             // Id
             // 
@@ -134,13 +107,45 @@
             this.Position.Name = "Position";
             this.Position.ReadOnly = true;
             // 
+            // empEditBtn
+            // 
+            this.empEditBtn.Location = new System.Drawing.Point(424, 471);
+            this.empEditBtn.Name = "empEditBtn";
+            this.empEditBtn.Size = new System.Drawing.Size(101, 35);
+            this.empEditBtn.TabIndex = 6;
+            this.empEditBtn.Text = "Редактирование сотрудника";
+            this.empEditBtn.UseVisualStyleBackColor = true;
+            this.empEditBtn.Click += new System.EventHandler(this.EmpEditBtn_Click);
+            // 
+            // btnAddEmp
+            // 
+            this.btnAddEmp.Location = new System.Drawing.Point(6, 467);
+            this.btnAddEmp.Name = "btnAddEmp";
+            this.btnAddEmp.Size = new System.Drawing.Size(101, 35);
+            this.btnAddEmp.TabIndex = 7;
+            this.btnAddEmp.Text = "Добавить сотруднка";
+            this.btnAddEmp.UseVisualStyleBackColor = true;
+            this.btnAddEmp.Click += new System.EventHandler(this.BtnAddEmp_Click);
+            // 
+            // showEmpBnt
+            // 
+            this.showEmpBnt.Location = new System.Drawing.Point(317, 471);
+            this.showEmpBnt.Name = "showEmpBnt";
+            this.showEmpBnt.Size = new System.Drawing.Size(101, 35);
+            this.showEmpBnt.TabIndex = 8;
+            this.showEmpBnt.Text = "Просмотр";
+            this.showEmpBnt.UseVisualStyleBackColor = true;
+            this.showEmpBnt.Click += new System.EventHandler(this.ShowEmpBnt_Click);
+            // 
             // depGroupBox
             // 
+            this.depGroupBox.Controls.Add(this.btnShowDep);
+            this.depGroupBox.Controls.Add(this.btnEditDep);
+            this.depGroupBox.Controls.Add(this.btnAddDep);
             this.depGroupBox.Controls.Add(this.departmentsTreeView);
-            this.depGroupBox.Controls.Add(this.btnAddEmp);
             this.depGroupBox.Location = new System.Drawing.Point(12, 13);
             this.depGroupBox.Name = "depGroupBox";
-            this.depGroupBox.Size = new System.Drawing.Size(325, 512);
+            this.depGroupBox.Size = new System.Drawing.Size(328, 512);
             this.depGroupBox.TabIndex = 9;
             this.depGroupBox.TabStop = false;
             this.depGroupBox.Text = "Отделы";
@@ -150,18 +155,49 @@
             this.empGroupBox.Controls.Add(this.employeesDataGridView);
             this.empGroupBox.Controls.Add(this.showEmpBnt);
             this.empGroupBox.Controls.Add(this.empEditBtn);
-            this.empGroupBox.Location = new System.Drawing.Point(343, 13);
+            this.empGroupBox.Controls.Add(this.btnAddEmp);
+            this.empGroupBox.Location = new System.Drawing.Point(346, 13);
             this.empGroupBox.Name = "empGroupBox";
             this.empGroupBox.Size = new System.Drawing.Size(531, 512);
             this.empGroupBox.TabIndex = 10;
             this.empGroupBox.TabStop = false;
             this.empGroupBox.Text = "Сотрудники отдела";
             // 
+            // btnAddDep
+            // 
+            this.btnAddDep.Location = new System.Drawing.Point(6, 467);
+            this.btnAddDep.Name = "btnAddDep";
+            this.btnAddDep.Size = new System.Drawing.Size(101, 35);
+            this.btnAddDep.TabIndex = 8;
+            this.btnAddDep.Text = "Добавить";
+            this.btnAddDep.UseVisualStyleBackColor = true;
+            this.btnAddDep.Click += new System.EventHandler(this.BtnAddDep_Click);
+            // 
+            // btnEditDep
+            // 
+            this.btnEditDep.Location = new System.Drawing.Point(113, 467);
+            this.btnEditDep.Name = "btnEditDep";
+            this.btnEditDep.Size = new System.Drawing.Size(101, 35);
+            this.btnEditDep.TabIndex = 9;
+            this.btnEditDep.Text = "Редактировать";
+            this.btnEditDep.UseVisualStyleBackColor = true;
+            this.btnEditDep.Click += new System.EventHandler(this.BtnEditDep_Click);
+            // 
+            // btnShowDep
+            // 
+            this.btnShowDep.Location = new System.Drawing.Point(220, 467);
+            this.btnShowDep.Name = "btnShowDep";
+            this.btnShowDep.Size = new System.Drawing.Size(101, 35);
+            this.btnShowDep.TabIndex = 10;
+            this.btnShowDep.Text = "Просмотр";
+            this.btnShowDep.UseVisualStyleBackColor = true;
+            this.btnShowDep.Click += new System.EventHandler(this.BtnShowDep_Click);
+            // 
             // DepartmentsList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(886, 539);
+            this.ClientSize = new System.Drawing.Size(884, 531);
             this.Controls.Add(this.empGroupBox);
             this.Controls.Add(this.depGroupBox);
             this.Name = "DepartmentsList";
@@ -188,5 +224,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Position;
         private System.Windows.Forms.GroupBox depGroupBox;
         private System.Windows.Forms.GroupBox empGroupBox;
+        private System.Windows.Forms.Button btnShowDep;
+        private System.Windows.Forms.Button btnEditDep;
+        private System.Windows.Forms.Button btnAddDep;
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace BL.Models
 {
@@ -11,9 +12,12 @@ namespace BL.Models
     {
         private string name;
         private string code;
+        private Department parentDepartmen;
+        private Guid? parentDepartmentId;
 
         public Department()
         {
+            Id = Guid.NewGuid();
             SubDepartmenents = new List<Department>();
             Empoyees = new List<Employee>();
         }
@@ -26,7 +30,18 @@ namespace BL.Models
         /// <summary>
         /// Идентификатор родительского отдела
         /// </summary>
-        public Guid? ParentDepartmentId { get; set; }
+        public Guid? ParentDepartmentId
+        {
+            get => parentDepartmentId;
+            set
+            {
+                if (value.HasValue && value.Value == Id)
+                {
+                    throw new Exception("Родительский отдел не может совпадать с текущим");
+                }
+                parentDepartmentId = value;
+            }
+        }
 
         /// <summary>
         /// Код отдела
@@ -47,10 +62,26 @@ namespace BL.Models
                   .GreaterOrThrow(50, "наименование не должно превышать 50 симаолов");
         }
 
-        public Department ParentDepartmen { get; set; }
+        public Department ParentDepartmen
+        {
+            get => parentDepartmen;
+            set
+            {
+                parentDepartmen = value;
+                ParentDepartmentId = value?.Id;
+            }
+        }
 
         public virtual ICollection<Department> SubDepartmenents { get; set; }
 
         public virtual ICollection<Employee> Empoyees { get; set; }
+
+        public override string ToString()
+        {
+            var fullName = new StringBuilder(Name);
+            if (Code != null)
+                fullName.Append($" ({Code})");
+            return fullName.ToString();
+        }
     }
 }

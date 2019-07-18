@@ -53,12 +53,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\DepartmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DepartmentForm.Designer.cs">
+      <DependentUpon>DepartmentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DepartmentsList.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\DepartmentsList.Designer.cs">
       <DependentUpon>DepartmentsList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\EditorBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ShowingMode.cs" />
     <Compile Include="Forms\UserForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,8 +77,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\DepartmentForm.resx">
+      <DependentUpon>DepartmentForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DepartmentsList.resx">
       <DependentUpon>DepartmentsList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EditorBase.resx">
+      <DependentUpon>EditorBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserForm.resx">
       <DependentUpon>UserForm.cs</DependentUpon>
