@@ -81,11 +81,13 @@ namespace CostaContest.Forms
             UpdateEmployees();
         }
 
-        private void EmpEditBtn_Click(object sender, EventArgs e)
+        private async void EmpEditBtn_Click(object sender, EventArgs e)
         {
             if (!IsEmployeeSelected()) return;
 
-            var userForm = new UserForm(_currentEmployee, true);
+            var departments = await _departmentsManager.GetDepartmentsAsync();
+
+            var userForm = new UserForm(_currentEmployee, departments);
             var result = userForm.ShowDialog();
             if (result != DialogResult.OK)
             {

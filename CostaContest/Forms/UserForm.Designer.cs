@@ -40,15 +40,16 @@
             this.tbxPost = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tbxAge = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tbxDocNum = new System.Windows.Forms.TextBox();
             this.tbxDocSer = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cbxDepart = new System.Windows.Forms.ComboBox();
             this.tbxDepart = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
-            this.tbxAge = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -170,6 +171,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Личные данные";
             // 
+            // tbxAge
+            // 
+            this.tbxAge.Location = new System.Drawing.Point(113, 130);
+            this.tbxAge.Name = "tbxAge";
+            this.tbxAge.ReadOnly = true;
+            this.tbxAge.Size = new System.Drawing.Size(179, 20);
+            this.tbxAge.TabIndex = 19;
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -215,6 +224,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cbxDepart);
             this.groupBox2.Controls.Add(this.tbxDepart);
             this.groupBox2.Controls.Add(this.tbxPost);
             this.groupBox2.Controls.Add(this.label6);
@@ -225,6 +235,14 @@
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Организация";
+            // 
+            // cbxDepart
+            // 
+            this.cbxDepart.FormattingEnabled = true;
+            this.cbxDepart.Location = new System.Drawing.Point(108, 20);
+            this.cbxDepart.Name = "cbxDepart";
+            this.cbxDepart.Size = new System.Drawing.Size(220, 21);
+            this.cbxDepart.TabIndex = 13;
             // 
             // tbxDepart
             // 
@@ -244,14 +262,6 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
-            // tbxAge
-            // 
-            this.tbxAge.Location = new System.Drawing.Point(113, 130);
-            this.tbxAge.Name = "tbxAge";
-            this.tbxAge.ReadOnly = true;
-            this.tbxAge.Size = new System.Drawing.Size(179, 20);
-            this.tbxAge.TabIndex = 19;
-            // 
             // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -263,7 +273,6 @@
             this.MinimizeBox = false;
             this.Name = "UserForm";
             this.Text = "UserForm";
-            this.Load += new System.EventHandler(this.UserForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -295,5 +304,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tbxAge;
+        private System.Windows.Forms.ComboBox cbxDepart;
     }
 }

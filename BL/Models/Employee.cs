@@ -15,11 +15,19 @@ namespace BL.Models
         private string patronymic;
         private string docSeries;
         private string docNumber;
+        private Department department;
 
         public Employee()
         {
             ID = -1;
             DateOfBirth = DateTime.Today;
+        }
+
+        public Employee(Department department)
+        {
+            ID = -1;
+            DateOfBirth = DateTime.Today;
+            Department = department;
         }
 
         /// <summary>
@@ -121,7 +129,15 @@ namespace BL.Models
         /// <summary>
         /// Отдел работы
         /// </summary>
-        public virtual Department Department { get; set; }
+        public virtual Department Department
+        {
+            get => department;
+            set
+            {
+                department = value ?? throw new Exception("Необходимо указать отдел");
+                DepartmentID = value.Id;
+            }
+        }
 
         /// <summary>
         /// Возраст сотрудника
